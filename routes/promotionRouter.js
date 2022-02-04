@@ -57,7 +57,9 @@ promotionRouter
   .put((req, res, next) => {
     Promotion.findByIdAndUpdate(
       req.params.promotionId,
-      { $set: req.body },
+      {
+        $set: req.body,
+      },
       { new: true }
     )
       .then((promotion) => {

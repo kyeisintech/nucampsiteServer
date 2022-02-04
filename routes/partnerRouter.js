@@ -27,7 +27,7 @@ partnerRouter
     res.statusCode = 403;
     res.end("PUT operation not supported on /partners");
   })
-  .delete((req, res) => {
+  .delete((req, res, next) => {
     Partner.deleteMany()
       .then((response) => {
         res.statusCode = 200;
@@ -57,7 +57,9 @@ partnerRouter
   .put((req, res, next) => {
     Partner.findByIdAndUpdate(
       req.params.partnerId,
-      { $set: req.body },
+      {
+        $set: req.body,
+      },
       { new: true }
     )
       .then((partner) => {
